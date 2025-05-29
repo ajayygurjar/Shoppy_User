@@ -52,7 +52,7 @@ const Header = () => {
                   </Button>
                 </>
                
-                <Button  variant="outline-light" className="ms-2">
+                <Button as={Link} to='auth' variant="outline-light" className="ms-2">
                   Login
                 </Button>
               
