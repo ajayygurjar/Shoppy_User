@@ -43,7 +43,7 @@ const Category = () => {
             <div
               role="button"
               onClick={() => navigate(`/category/${encodeURIComponent(cat.title)}`)}
-              className="bg-white border shadow-sm p-3 d-flex flex-column align-items-center"
+              className="bg-white text-dark border shadow-sm p-3 d-flex flex-column align-items-center"
               style={{
                 borderRadius: "10px",
                 height: "100%",
