@@ -8,7 +8,7 @@ const Footer = () => {
             <Row>
                 <Col md={4}>
                 <h5>Shoppy</h5>
-                <p>&copy;{new Date().getFullYear()}Shoppy. All rights reserved. </p>
+                <p>&copy;{new Date().getFullYear()} Shoppy. All rights reserved. </p>
                 </Col>
                 <Col md={4}>
             <h5>Contact</h5>
