@@ -64,6 +64,7 @@ const Profile = ({ show, onHide }) => {
         setFormInput(profileData);
       } catch (err) {
         setError("Failed to load profile data." );
+        console.log(err)
         
       }
       setLoading(false);
