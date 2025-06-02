@@ -13,20 +13,15 @@ const ProductPage = () => {
     return (
       <p className="text-center mt-5 text-danger">Error: {error.message}</p>
     );
-  if (!data || typeof data !== "object")
+  if (!data || data.length===0)
     return (
       <p className="text-center mt-5 text-warning">No products found.</p>
     );
 
-  const ProductList = Object.entries(data).map(([id, product]) => ({
-    id,
-    ...product,
-  }));
-
   return (
     <Container className="mt-5">
       <Row>
-        {ProductList.map((product) => (
+        {data.map((product) => (
           <Col md={4} key={product.id} className="mb-4">
             <Card>
               <Link to={`/product/${product.id}`}>

@@ -11,7 +11,7 @@ const SignUp_Url =
 const SignIn_Url =
   "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=";
 
-const Auth = ({show}) => {
+const Auth = ({ show }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -104,39 +104,44 @@ const Auth = ({show}) => {
             <Form.Label>Your Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter your email "
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="email">
+
+          <Form.Group className="mb-3" controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control
-              type="email"
-              placeholder="Enter your email "
+              type="password" // <-- Fixed type
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </Form.Group>
+
           {!isLogin && (
-            <Form.Group className="mb-3" controlId="email">
+            <Form.Group className="mb-3" controlId="confirmPassword">
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control
                 type="password"
-                placeholder="Enter your email "
+                placeholder="Confirm your password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
             </Form.Group>
           )}
+
           {error && <p className="text-danger">{error}</p>}
 
           <div className="d-grid gap-2">
             {!isLoading ? (
-              <Button>{isLogin ? "Login" : "Create Account"}</Button>
+              <Button type="submit">
+                {isLogin ? "Login" : "Create Account"}
+              </Button>
             ) : (
               <p>Sending request...</p>
             )}

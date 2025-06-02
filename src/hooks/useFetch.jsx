@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const useFetch = (api) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,12 +14,25 @@ const useFetch = (api) => {
         const result = response.data;
 
         // Firebase returns an object, not an array
-        const loadedData = Object.keys(result).map((key) => ({
-          id: key,
-          ...result[key],
-        }));
 
-        setData(loadedData);
+          if (result && typeof result === 'object' && !Array.isArray(result)) {
+          const keys = Object.keys(result);
+          const isList = keys.every((key) => typeof result[key] === 'object');
+
+          if (isList) {
+            const loadedData = keys.map((key) => ({
+              id: key,
+              ...result[key],
+            }));
+            setData(loadedData);
+          } else {
+            // It's a single object (like product details)
+            setData(result);
+          }
+        } else {
+          // If result is already an array or a primitive
+          setData(result);
+        }
       } catch (err) {
         setError(err);
       } finally {
