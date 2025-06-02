@@ -7,23 +7,57 @@ import {
   Form,
 } from "react-bootstrap";
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { authActions } from "../../store/authSlice";
+import Auth from "../Auth/Auth";
+import Profile from '../Auth/Profile'
 
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoginModalOpen = useSelector((state) => state.auth.isLoginModalOpen);
+  const isProfileModalOpen = useSelector(
+    (state) => state.auth.isProfileModalOpen
+  );
+
+  const openProfileModalHandler = () => {
+    dispatch(authActions.openProfileModal());
+  };
+
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+    navigate("/auth");
+  };
+
+  const openLoginModalHandler = () => {
+    dispatch(authActions.openLoginModal());
+  };
+
+  
+
   return (
-    <Navbar bg="info" expand='lg' className="text-white">
+    <>
+      <Navbar bg="info" expand="lg" className="text-white">
         <Container>
-            <Navbar.Brand as={Link} to='/' className="text-white">Shoppy</Navbar.Brand>
-            <Navbar.Toggle aria-control='basic-navbar-nav'/>
-            <Navbar.Collapse id='basic-navbar-nav'>
-            
-            <Form className="d-flex me-2" style={{ maxWidth: "350px" }}>
+          <Navbar.Brand as={Link} to="/" className="text-white">
+            Shoppy
+          </Navbar.Brand>
+          <Navbar.Toggle aria-control="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Form className="d-flex me-2" style={{ maxWidth: "350px" }}  >
               <InputGroup className="w-100">
                 <Form.Control
                   type="text"
                   placeholder="Search..."
                   aria-label="Search"
-                  
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <Button variant="outline-light" type="submit">
                   <i className="bi bi-search"></i>
@@ -39,28 +73,51 @@ const Header = () => {
                 Orders
               </Nav.Link>
 
-              <Button variant="info"  className="text-white ms-2">
+              <Button variant="info" className="text-white ms-2">
                 <i className="bi bi-cart"></i>
               </Button>
 
+              {isLoggedIn ? (
                 <>
-                  <Button variant="info"  className="text-white ms-2">
+                  <Button
+                    variant="info"
+                    onClick={openProfileModalHandler}
+                    className="text-white ms-2"
+                  >
                     <i className="bi bi-person"></i>
                   </Button>
-                  <Button  variant="danger" className="ms-2">
+                  <Button
+                    onClick={logoutHandler}
+                    variant="danger"
+                    className="ms-2"
+                  >
                     Logout
                   </Button>
                 </>
-               
-                <Button as={Link} to='auth' variant="outline-light" className="ms-2">
+              ) : (
+                <Button
+                  onClick={openLoginModalHandler}
+                  variant="outline-light"
+                  className="ms-2"
+                >
                   Login
                 </Button>
-              
+              )}
             </Nav>
-            </Navbar.Collapse>
+          </Navbar.Collapse>
         </Container>
-    </Navbar>
-  )
-}
+      </Navbar>
 
-export default Header
+      <Auth show={isLoginModalOpen} />
+
+      {isLoggedIn && (
+        <Profile
+          show={isProfileModalOpen}
+          onHide={() => dispatch(authActions.closeProfileModal())}
+        />
+      )}
+    </>
+  );
+};
+
+export default Header;
