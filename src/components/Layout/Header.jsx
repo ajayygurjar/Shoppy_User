@@ -40,6 +40,10 @@ const Header = () => {
   };
 
   
+  const submitSearchHandler = (e) => {
+  e.preventDefault();
+  console.log("Searching for:", searchTerm);
+};
 
   return (
     <>
@@ -48,9 +52,9 @@ const Header = () => {
           <Navbar.Brand as={Link} to="/" className="text-white">
             Shoppy
           </Navbar.Brand>
-          <Navbar.Toggle aria-control="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Form className="d-flex me-2" style={{ maxWidth: "350px" }}  >
+            <Form className="d-flex me-2" style={{ maxWidth: "350px" }} onSubmit={submitSearchHandler}  >
               <InputGroup className="w-100">
                 <Form.Control
                   type="text"
