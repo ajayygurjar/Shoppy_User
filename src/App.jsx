@@ -7,6 +7,7 @@ import Home from "./components/Home/Home";
 import ProductPage from "./components/Product/ProductPage";
 import ProductDetailPage from "./components/Product/ProductDetailPage";
 import CategoryPage from "./components/Category/CategoryPage";
+import SearchResults from "./components/Pages/SearchResult";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,7 +21,8 @@ function App() {
         { path: "/orders", element: <OrdersPage /> },
         { path: "/product", element: <ProductPage /> },
         { path: "/product/:id", element: <ProductDetailPage /> },
-        {path:'category/:categoryName',element:<CategoryPage/>},
+        { path: "category/:categoryName", element: <CategoryPage /> },
+        { path: "/search", element: <SearchResults /> },
       ],
     },
   ]);

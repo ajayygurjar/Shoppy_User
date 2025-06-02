@@ -42,7 +42,12 @@ const Header = () => {
   
   const submitSearchHandler = (e) => {
   e.preventDefault();
-  console.log("Searching for:", searchTerm);
+  
+   if (searchTerm.trim()) {
+    navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+    setSearchTerm("");
+  }
+  
 };
 
   return (
