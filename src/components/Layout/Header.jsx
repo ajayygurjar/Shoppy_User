@@ -13,6 +13,7 @@ import { useState } from "react";
 import { authActions } from "../../store/authSlice";
 import Auth from "../Auth/Auth";
 import Profile from '../Auth/Profile'
+import { toggleCart } from "../../store/cartSlice";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -50,6 +51,8 @@ const Header = () => {
   
 };
 
+
+
   return (
     <>
       <Navbar bg="info" expand="lg" className="text-white">
@@ -82,7 +85,7 @@ const Header = () => {
                 Orders
               </Nav.Link>
 
-              <Button variant="info" className="text-white ms-2">
+              <Button variant="info" className="text-white ms-2" onClick={() => dispatch(toggleCart())}>
                 <i className="bi bi-cart"></i>
               </Button>
 

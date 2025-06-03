@@ -2,8 +2,12 @@ import { Outlet } from "react-router-dom";
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import Cart from "../Cart/Cart";
 
 const RootLayout = () => {
+
+
+  
   return (
     <div
       style={{
@@ -13,6 +17,7 @@ const RootLayout = () => {
       }}
     >
       <Header />
+      <Cart/>
       <main
         style={{
           flex: 1,
