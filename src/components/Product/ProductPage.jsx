@@ -1,22 +1,24 @@
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
+import { toggleCart,addToCart } from "../../store/cartSlice";
+import { useDispatch } from "react-redux";
+
 
 const api =
   "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/products.json";
 
 const ProductPage = () => {
   const { data, loading, error } = useFetch(api);
+  const dispatch = useDispatch();
 
   if (loading) return <p className="text-center mt-5">Loading...</p>;
   if (error)
     return (
       <p className="text-center mt-5 text-danger">Error: {error.message}</p>
     );
-  if (!data || data.length===0)
-    return (
-      <p className="text-center mt-5 text-warning">No products found.</p>
-    );
+  if (!data || data.length === 0)
+    return <p className="text-center mt-5 text-warning">No products found.</p>;
 
   return (
     <Container className="mt-5">
@@ -60,11 +62,23 @@ const ProductPage = () => {
                   </Link>
                 </Card.Title>
                 <h5>₹{product.price || "N/A"}</h5>
-                <Button variant="secondary" className="me-2">
+                <Button
+                  variant="secondary"
+                  className="me-2"
+                  onClick={() => dispatch(addToCart(product))}
+                >
                   Add to Cart
                 </Button>
                 <Link to={`/product/${product.id}`}>
-                  <Button variant="primary">Buy Now</Button>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      dispatch(addToCart(product)); // Add product to cart
+                      dispatch(toggleCart()); // Open the cart drawer
+                    }}
+                  >
+                    Buy Now
+                  </Button>
                 </Link>
               </Card.Body>
             </Card>

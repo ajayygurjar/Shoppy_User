@@ -2,9 +2,12 @@
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import useFetch from "../../hooks/useFetch";
+import { useDispatch } from "react-redux";
+import { addToCart, toggleCart } from "../../store/cartSlice";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   const {
     data: product,
@@ -17,9 +20,7 @@ const ProductDetailPage = () => {
   if (loading) return <p className="text-center mt-4">Loading...</p>;
   if (error)
     return (
-      <p className="text-center mt-4 text-danger">
-        Error: {error.message}
-      </p>
+      <p className="text-center mt-4 text-danger">Error: {error.message}</p>
     );
   if (!product)
     return <p className="text-center mt-4 text-warning">Product not found.</p>;
@@ -47,11 +48,17 @@ const ProductDetailPage = () => {
             <Button
               variant="secondary"
               className="me-2"
-              onClick={() => alert("Added to cart!")}
+              onClick={() => dispatch(addToCart(product))}
             >
               Add to Cart
             </Button>
-            <Button variant="primary" onClick={() => alert("Buy product!")}>
+            <Button
+              variant="primary"
+              onClick={() => {
+                dispatch(addToCart(product));
+                dispatch(toggleCart());
+              }}
+            >
               Buy Now
             </Button>
           </Card.Body>
