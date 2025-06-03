@@ -8,6 +8,7 @@ import ProductPage from "./components/Product/ProductPage";
 import ProductDetailPage from "./components/Product/ProductDetailPage";
 import CategoryPage from "./components/Category/CategoryPage";
 import SearchResults from "./components/Pages/SearchResult";
+import CartPersistence from "./hooks/CartPersistence";
 
 function App() {
   const router = createBrowserRouter([
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <>
+      <CartPersistence />
       <RouterProvider router={router} />
     </>
   );

@@ -10,11 +10,12 @@ import {
 import { Offcanvas, Button, Form } from "react-bootstrap";
 import axios from "axios";
 
-const CartDrawer = () => {
+const Cart = () => {
   const dispatch = useDispatch();
   const { isCartOpen, cartItems, totalAmount } = useSelector(
     (state) => state.cart
   );
+  const auth = useSelector((state) => state.auth);
 
   // Local state to toggle payment options and selected method
   const [showPayment, setShowPayment] = useState(false);
@@ -22,33 +23,35 @@ const CartDrawer = () => {
 
   // POST order to Firebase
   const placeOrder = async () => {
-    if (cartItems.length === 0) {
-      alert("Cart is empty!");
-      return;
-    }
+  if (cartItems.length === 0) {
+    alert("Cart is empty!");
+    return;
+  }
 
-    const orderData = {
-      items: cartItems,
-      totalAmount,
-      paymentMethod,
-      orderDate: new Date().toISOString(),
-      status: "placed",
-    };
-
-    try {
-      // Replace with your Firebase URL for orders
-      await axios.post(
-        `https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json`,
-        orderData
-      );
-      alert("Order placed!");
-      dispatch(clearCart());
-      setShowPayment(false);
-    } catch (error) {
-      alert("Failed to place order. Please try again.");
-      console.error(error);
-    }
+  const orderData = {
+    user: auth.email || "guest",
+    items: cartItems,
+    totalAmount,
+    paymentMethod,
+    orderDate: new Date().toISOString(),
+    status: "placed",
   };
+
+  try {
+    await axios.post(
+      `https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json`,
+      orderData
+    );
+    alert("Order placed!");
+    dispatch(clearCart());
+    localStorage.removeItem("guest_cart");
+    setShowPayment(false);
+  } catch (error) {
+    alert("Failed to place order.");
+    console.error("Order error:", error.message);
+  }
+};
+
 
   return (
     <Offcanvas
@@ -65,7 +68,7 @@ const CartDrawer = () => {
         ) : (
           <>
             {cartItems.map((item) => (
-              <div key={item.id} className="mb-3 border-bottom pb-2">
+              <div key={`${item.id}-${item.title}`} className="mb-3 border-bottom pb-2">
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center">
                     {/* Item image */}
@@ -166,4 +169,4 @@ const CartDrawer = () => {
   );
 };
 
-export default CartDrawer;
+export default Cart;
