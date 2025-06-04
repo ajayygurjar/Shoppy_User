@@ -33,7 +33,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(authActions.logout());
-    navigate("/auth");
+    navigate("/");
   };
 
   const openLoginModalHandler = () => {
