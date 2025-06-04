@@ -23,6 +23,13 @@ const Cart = () => {
 
   // POST order to Firebase
   const placeOrder = async () => {
+
+     if (!auth.token) {
+    alert("Please log in to place an order.");
+    return;
+  }
+
+  
   if (cartItems.length === 0) {
     alert("Cart is empty!");
     return;
