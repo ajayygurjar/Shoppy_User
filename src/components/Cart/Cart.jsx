@@ -12,6 +12,7 @@ import axios from "axios";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const { currentAddress } = useSelector((state) => state.address); //address
   const { isCartOpen, cartItems, totalAmount } = useSelector(
     (state) => state.cart
   );
@@ -23,42 +24,43 @@ const Cart = () => {
 
   // POST order to Firebase
   const placeOrder = async () => {
+    if (!auth.token) {
+      alert("Please log in to place an order.");
+      return;
+    }
+    if (!currentAddress) {
+      alert("Please add your address in profile before placing an order.");
+      return;
+    }
 
-     if (!auth.token) {
-    alert("Please log in to place an order.");
-    return;
-  }
+    if (cartItems.length === 0) {
+      alert("Cart is empty!");
+      return;
+    }
 
-  
-  if (cartItems.length === 0) {
-    alert("Cart is empty!");
-    return;
-  }
+    const orderData = {
+      user: auth.email || "guest",
+      items: cartItems,
+      totalAmount,
+      paymentMethod,
+      orderDate: new Date().toISOString(),
+      status: "placed",
+    };
 
-  const orderData = {
-    user: auth.email || "guest",
-    items: cartItems,
-    totalAmount,
-    paymentMethod,
-    orderDate: new Date().toISOString(),
-    status: "placed",
+    try {
+      await axios.post(
+        `https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json`,
+        orderData
+      );
+      alert("Order placed!");
+      dispatch(clearCart());
+      localStorage.removeItem("guest_cart");
+      setShowPayment(false);
+    } catch (error) {
+      alert("Failed to place order.");
+      console.error("Order error:", error.message);
+    }
   };
-
-  try {
-    await axios.post(
-      `https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json`,
-      orderData
-    );
-    alert("Order placed!");
-    dispatch(clearCart());
-    localStorage.removeItem("guest_cart");
-    setShowPayment(false);
-  } catch (error) {
-    alert("Failed to place order.");
-    console.error("Order error:", error.message);
-  }
-};
-
 
   return (
     <Offcanvas
@@ -75,7 +77,10 @@ const Cart = () => {
         ) : (
           <>
             {cartItems.map((item) => (
-              <div key={`${item.id}-${item.title}`} className="mb-3 border-bottom pb-2">
+              <div
+                key={`${item.id}-${item.title}`}
+                className="mb-3 border-bottom pb-2"
+              >
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex align-items-center">
                     {/* Item image */}
@@ -141,6 +146,13 @@ const Cart = () => {
 
               {showPayment && (
                 <>
+                  <div className="mb-3">
+                    <strong>Delivery Address:</strong>
+                    <div>
+                      {currentAddress ||
+                        "No address available. Please update profile."}
+                    </div>
+                  </div>
                   <Form>
                     <Form.Check
                       type="radio"

@@ -8,7 +8,7 @@ import ProductPage from "./components/Product/ProductPage";
 import ProductDetailPage from "./components/Product/ProductDetailPage";
 import CategoryPage from "./components/Category/CategoryPage";
 import SearchResults from "./components/Pages/SearchResult";
-import CartPersistence from "./hooks/CartPersistence";
+import CartPersistence from "./components/Cart/CartPersistence";
 
 function App() {
   const router = createBrowserRouter([

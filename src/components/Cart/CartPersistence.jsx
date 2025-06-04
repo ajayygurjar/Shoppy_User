@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { loadCart, setLoading, setError } from "../store/cartSlice";
+import { loadCart, setLoading, setError } from "../../store/cartSlice";
 
 const CartPersistence = () => {
   const cart = useSelector((state) => state.cart);

@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import { useDispatch } from 'react-redux';
+import { setAddress } from '../../store/addressSlice';
 
 const API_KEY = "AIzaSyDVvJYqgz-adO06OWVJcGPCeEdwSMYz1is";
 const UPDATE_PROFILE_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
@@ -11,6 +13,7 @@ const LOOKUP_PROFILE_URL = `https://identitytoolkit.googleapis.com/v1/accounts:l
 const DATABASE_URL = "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app";
 
 const Profile = ({ show, onHide }) => {
+  const dispatch=useDispatch()
   const token = useSelector((state) => state.auth.token);
   const [userId, setUserId] = useState("");
   
@@ -103,6 +106,9 @@ const Profile = ({ show, onHide }) => {
         phoneNumber: formInput.phoneNumber,
         address: formInput.address,
       });
+
+
+       dispatch(setAddress(formInput.address));
 
       // Update saved profile with new data after successful update
       setSavedProfile(formInput);

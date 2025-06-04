@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { fetchAddress } from "../../store/addressSlice";
+
+
+
 
 const API_Key = "AIzaSyDVvJYqgz-adO06OWVJcGPCeEdwSMYz1is";
 const SignUp_Url =
@@ -70,8 +74,11 @@ const Auth = ({ show }) => {
         authActions.login({
           token: data.idToken,
           email: data.email,
+          userId: data.localId,
         })
       );
+
+      dispatch(fetchAddress(data.localId)) //fetchinng address
 
       dispatch(authActions.closeLoginModal());
       navigate("/", { replace: true });
