@@ -21,7 +21,7 @@ const Profile = ({ show, onHide }) => {
   const [error, setError] = useState(null);
   const [updating, setUpdating] = useState(false);
 
-  // Saved profile info for display only (read-only)
+  // Saved profile
   const [savedProfile, setSavedProfile] = useState({
     displayName: "",
     email: "",

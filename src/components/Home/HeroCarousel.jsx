@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Carousel, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import useFetch from '../../hooks/useFetch';  
+import { useEffect, useState } from "react";
+import { Carousel, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 const api =
-  'https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/products.json';
+  "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/products.json";
 
 const getRandomItems = (arr, n) => {
   const result = [];
@@ -27,31 +27,68 @@ const HeroCarousel = () => {
 
   useEffect(() => {
     if (products && Array.isArray(products)) {
-      // pick 3 random products
-      const randomProducts = getRandomItems(products, 3);
+      // pick 5 random products
+      const randomProducts = getRandomItems(products, 5);
       setFeaturedProducts(randomProducts);
     }
   }, [products]);
 
-  if (loading) return <p>Loading featured products...</p>;
-  if (error) return <p>Error loading products: {error.message}</p>;
+  if (loading)
+    return <p className="text-light">Loading featured products...</p>;
+  if (error)
+    return (
+      <p className="text-danger">Error loading products: {error.message}</p>
+    );
 
-  if (featuredProducts.length === 0) return <p>No featured products available.</p>;
+  if (featuredProducts.length === 0)
+    return <p className="text-muted">No featured products available.</p>;
 
   return (
     <Carousel fade interval={4000} controls={false} indicators pause={false}>
       {featuredProducts.map(({ id, title, description, imageUrl }) => (
         <Carousel.Item key={id}>
-          <img
-            className="d-block w-100"
-            src={imageUrl}
-            alt={title}
-            style={{ maxHeight: '400px', objectFit: 'contain' ,padding:'20px', backgroundColor:'#fff' }}
-          />
-          <Carousel.Caption className="bg-dark bg-opacity-50 rounded p-3">
-            <h3>{title}</h3>
-            <p>{description || 'Great product for your needs'}</p>
-            <Button as={Link} to={`/product/${id}`} variant="primary">
+          <div
+            style={{
+              backgroundColor: "#2a2a2a",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "400px",
+              padding: "20px",
+              borderRadius: "8px",
+              boxShadow: "inset 0 0 40px rgba(0, 0, 0, 0.5)",
+            }}
+          >
+            <img
+              src={imageUrl}
+              alt={title}
+              style={{
+                maxHeight: "100%",
+                maxWidth: "100%",
+                objectFit: "contain",
+              }}
+            />
+          </div>
+
+          <Carousel.Caption
+            style={{
+              backgroundColor: "rgba(18, 18, 18, 0.75)",
+              borderRadius: "12px",
+              padding: "20px",
+              color: "#f1f1f1",
+            }}
+          >
+            <h3 style={{ color: "#fbbf24" }}>{title}</h3>
+            <p>{description || "Great product for your needs"}</p>
+            <Button
+              as={Link}
+              to={`/product/${id}`}
+              style={{
+                borderColor: "#fbbf24",
+                color: "#fbbf24",
+              }}
+              variant="outline-light"
+            >
               View Product
             </Button>
           </Carousel.Caption>

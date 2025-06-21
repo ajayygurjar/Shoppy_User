@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
-import { toggleCart,addToCart } from "../../store/cartSlice";
+import { toggleCart, addToCart } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
-
 
 const api =
   "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/products.json";
@@ -12,7 +11,7 @@ const ProductPage = () => {
   const { data, loading, error } = useFetch(api);
   const dispatch = useDispatch();
 
-  if (loading) return <p className="text-center mt-5">Loading...</p>;
+  if (loading) return <p className="text-center text-light mt-5">Loading...</p>;
   if (error)
     return (
       <p className="text-center mt-5 text-danger">Error: {error.message}</p>
@@ -25,7 +24,13 @@ const ProductPage = () => {
       <Row>
         {data.map((product) => (
           <Col md={4} key={product.id} className="mb-4">
-            <Card>
+            <Card
+              style={{
+                backgroundColor: "#1f1f1f",
+                color: "#f1f1f1",
+                border: "1px solid #333",
+              }}
+            >
               <Link to={`/product/${product.id}`}>
                 <div
                   style={{
@@ -35,6 +40,9 @@ const ProductPage = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
+                    backgroundColor: "#2a2a2a",
+                    borderTopLeftRadius: "5px",
+                    borderTopRightRadius: "5px",
                   }}
                 >
                   <Card.Img
@@ -47,8 +55,8 @@ const ProductPage = () => {
                       maxHeight: "100%",
                       width: "auto",
                       objectFit: "contain",
+                      padding: "10px",
                     }}
-                    className="mt-4"
                   />
                 </div>
               </Link>
@@ -56,14 +64,19 @@ const ProductPage = () => {
                 <Card.Title>
                   <Link
                     to={`/product/${product.id}`}
-                    style={{ textDecoration: "none", color: "black" }}
+                    style={{ textDecoration: "none", color: "#f1f1f1" }}
                   >
                     {product.title || "No Title"}
                   </Link>
                 </Card.Title>
                 <h5>₹{product.price || "N/A"}</h5>
                 <Button
-                  variant="secondary"
+                  style={{
+                    background: "#333",
+                    border: "1px solid #555",
+                    color: "#f1f1f1",
+                    transition: "background 0.3s",
+                  }}
                   className="me-2"
                   onClick={() => dispatch(addToCart(product))}
                 >
@@ -71,7 +84,12 @@ const ProductPage = () => {
                 </Button>
                 <Link to={`/product/${product.id}`}>
                   <Button
-                    variant="primary"
+                    style={{
+                      background: "linear-gradient(to right, #6b7280, #9ca3af)",
+                      border: "none",
+                      color: "#ffffff",
+                      transition: "opacity 0.3s",
+                    }}
                     onClick={() => {
                       dispatch(addToCart(product)); // Add product to cart
                       dispatch(toggleCart()); // Open the cart drawer

@@ -7,12 +7,12 @@ import {
   Form,
 } from "react-bootstrap";
 
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink,Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { authActions } from "../../store/authSlice";
 import Auth from "../Auth/Auth";
-import Profile from '../Auth/Profile'
+import Profile from "../Auth/Profile";
 import { toggleCart } from "../../store/cartSlice";
 
 const Header = () => {
@@ -40,29 +40,44 @@ const Header = () => {
     dispatch(authActions.openLoginModal());
   };
 
-  
   const submitSearchHandler = (e) => {
-  e.preventDefault();
-  
-   if (searchTerm.trim()) {
-    navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
-    setSearchTerm("");
-  }
-  
-};
+    e.preventDefault();
 
-
+    if (searchTerm.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchTerm.trim())}`);
+      setSearchTerm("");
+    }
+  };
 
   return (
     <>
-      <Navbar bg="info" expand="lg" className="text-white">
+      <Navbar 
+      style={{
+          background: 'linear-gradient(135deg, #121212, #1f1f1f)',
+          borderBottom: '1px solid #2a2a2a',
+        }}
+        expand="lg"
+        variant="dark"
+      className="text-white">
         <Container>
-          <Navbar.Brand as={Link} to="/" className="text-white">
+          <Navbar.Brand
+           as={Link} 
+           to="/" 
+           style={{
+              color: '#ffffff',
+              fontWeight: 'bold',
+              textShadow: '0 0 6px #00d4ff',
+            }}
+           >
             Shoppy
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Form className="d-flex me-2" style={{ maxWidth: "350px" }} onSubmit={submitSearchHandler}  >
+            <Form
+              className="d-flex me-2"
+              style={{ maxWidth: "350px" }}
+              onSubmit={submitSearchHandler}
+            >
               <InputGroup className="w-100">
                 <Form.Control
                   type="text"
@@ -70,37 +85,73 @@ const Header = () => {
                   aria-label="Search"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  className="bg-light text-dark"
+                  style={{
+                    backgroundColor: "#1f1f1f",
+                    borderColor: "#444",
+                    color: "#fff",
+                  }}
                 />
-                <Button variant="outline-light" type="submit">
+                <Button 
+                className="ms-2"
+                 style={{
+                    background: 'linear-gradient(to right, #4B4B4B, #9E9E9E)',
+                    border: 'none',
+                    color: 'white',
+                  }}
+                 type="submit"
+                 >
                   <i className="bi bi-search"></i>
                 </Button>
               </InputGroup>
             </Form>
 
             <Nav className="ms-auto align-items-center">
-              <Nav.Link as={Link} to="/about" className="text-white">
+              <Nav.Link 
+              as={NavLink}
+               to="/about"
+                 className={({ isActive }) => (isActive ? "fw-bold" : "")}
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fbbf24" : "#ffffff",
+                  })} 
+              
+              >
                 About
               </Nav.Link>
-              <Nav.Link as={Link} to="/orders" className="text-white">
-                Orders
-              </Nav.Link>
+              {isLoggedIn && (
+                <Nav.Link 
+                as={NavLink}
+                to="/orders"
+                  className={({ isActive }) => (isActive ? "fw-bold" : "")}
+                  style={({ isActive }) => ({
+                    color: isActive ? "#fbbf24" : "#ffffff",
+                  })}
+                 >
+                  Orders
+                </Nav.Link>
+              )}
 
-              <Button variant="info" className="text-white ms-2" onClick={() => dispatch(toggleCart())}>
-                <i className="bi bi-cart"></i>
+              <Button
+                className="text-white ms-2 p-0"
+                onClick={() => dispatch(toggleCart())}
+                variant="link"
+                
+              >
+                <i className="bi bi-cart" style={{fontSize:'1.3rem'}}></i>
               </Button>
 
               {isLoggedIn ? (
                 <>
                   <Button
-                    variant="info"
                     onClick={openProfileModalHandler}
-                    className="text-white ms-2"
+                     variant="link"
+                    className="text-white ms-3 p-0"
                   >
-                    <i className="bi bi-person"></i>
+                    <i className="bi bi-person" style={{fontSize:'1.3rem'}}></i>
                   </Button>
                   <Button
                     onClick={logoutHandler}
-                    variant="danger"
+                    variant="outline-light"
                     className="ms-2"
                   >
                     Logout
@@ -109,8 +160,8 @@ const Header = () => {
               ) : (
                 <Button
                   onClick={openLoginModalHandler}
+                  className="ms-3"
                   variant="outline-light"
-                  className="ms-2"
                 >
                   Login
                 </Button>

@@ -1,0 +1,92 @@
+.footer {
+  background-color: #1f1f1f;
+  color: #e5e5e5;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid #2a2a2a;
+  font-size: 0.95rem;
+}
+
+.sectionToggle {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #e5e5e5;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.sectionToggle:hover {
+  color: #fbbf24;
+}
+
+.desktopOnly {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktopOnly {
+    display: block;
+  }
+
+  /* Hide collapsible sections on desktop */
+  #about-collapse,
+  #contact-collapse,
+  #pages-collapse {
+    display: none !important;
+  }
+
+  .sectionToggle {
+    cursor: default;
+  }
+}
+
+.socialIcons {
+  margin-top: 0.5rem;
+}
+
+.socialIcons a {
+  color: #bbbbbb;
+  margin-right: 10px;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.socialIcons a:hover {
+  color: #00d4ff;
+}
+
+.footerLink {
+  color: #bbbbbb;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footerLink:hover {
+  color: #fbbf24;
+}
+
+.newsletterInput {
+  background-color: #333;
+  border: 1px solid #444;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.newsletterInput::placeholder {
+  color: #aaa;
+}
+
+.newsletterButton {
+  margin-left: 0.5rem;
+  background-color: #fbbf24 !important;
+  border: none;
+  color: #000;
+  font-weight: 500;
+}
+
+.newsletterButton:hover {
+  background-color: #e0a800 !important;
+}

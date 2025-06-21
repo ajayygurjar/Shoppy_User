@@ -5,23 +5,20 @@ import Footer from "./Footer";
 import Cart from "../Cart/Cart";
 
 const RootLayout = () => {
-
-
-  
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
+        backgroundColor: "#121212", // unified dark background
       }}
     >
       <Header />
-      <Cart/>
+      <Cart />
       <main
         style={{
           flex: 1,
-          backgroundColor: "#121212",
           color: "#f1f1f1",
           paddingTop: "1rem",
           paddingBottom: "1rem",

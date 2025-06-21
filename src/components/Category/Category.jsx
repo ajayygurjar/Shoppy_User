@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useNavigate } from "react-router-dom";
@@ -10,13 +9,17 @@ import "swiper/css/scrollbar";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 
 const Category = () => {
-  const api = 'https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/categories.json';
+  const api =
+    "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/categories.json";
   const { data, loading, error } = useFetch(api);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   if (loading) return <p className="text-center mt-4">Loading...</p>;
-  if (error) return <p className="text-center text-danger mt-4">Error: {error.message}</p>;
-  if (!data || typeof data !== 'object') return null;
+  if (error)
+    return (
+      <p className="text-center text-danger mt-4">Error: {error.message}</p>
+    );
+  if (!data || typeof data !== "object") return null;
 
   const categories = Object.entries(data).map(([id, item]) => ({
     id,
@@ -42,14 +45,24 @@ const Category = () => {
           <SwiperSlide key={cat.id}>
             <div
               role="button"
-              onClick={() => navigate(`/category/${encodeURIComponent(cat.title)}`)}
-              className="bg-white text-dark border shadow-sm p-3 d-flex flex-column align-items-center"
+              onClick={() =>
+                navigate(`/category/${encodeURIComponent(cat.title)}`)
+              }
+              className="bg-dark text-lght border p-3 d-flex flex-column align-items-center"
               style={{
                 borderRadius: "10px",
                 height: "100%",
                 cursor: "pointer",
                 transition: "0.3s",
+                backgroundColor: "#1f1f1f",
+                border: "1px solid #333",
               }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.backgroundColor = "#2a2a2a")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.backgroundColor = "#1f1f1f")
+              }
             >
               <img
                 src={cat.imageUrl?.trim() || "https://via.placeholder.com/150"}
@@ -60,6 +73,7 @@ const Category = () => {
                   height: "200px",
                   objectFit: "cover",
                   borderRadius: "8px",
+                  backgroundColor: "#2a2a2a",
                 }}
               />
               <p className="mt-2 fw-semibold text-center">{cat.title}</p>
