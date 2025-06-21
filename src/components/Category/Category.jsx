@@ -35,11 +35,13 @@ const Category = () => {
         navigation
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
+        loop={true}
         breakpoints={{
           320: { slidesPerView: 1 },
           768: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }}
+
       >
         {categories.map((cat) => (
           <SwiperSlide key={cat.id}>

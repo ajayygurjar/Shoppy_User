@@ -1,13 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import RootLayout from "./components/Layout/RootLayout";
-import Auth from "./components/Auth/Auth";
-import OrdersPage from "./components/Pages/OrdersPage";
-import AboutPage from "./components/Pages/AboutPage";
-import Home from "./components/Home/Home";
-import ProductPage from "./components/Product/ProductPage";
-import ProductDetailPage from "./components/Product/ProductDetailPage";
-import CategoryPage from "./components/Category/CategoryPage";
-import SearchResults from "./components/Pages/SearchResult";
+
+
+
+const Home = lazy(() => import("./components/Home/Home"));
+const ProductPage = lazy(() => import("./components/Product/ProductPage"));
+const ProductDetailPage = lazy(() => import("./components/Product/ProductDetailPage"));
+const CategoryPage = lazy(() => import("./components/Category/CategoryPage"));
+const Auth = lazy(() => import("./components/Auth/Auth"));
+const OrdersPage = lazy(() => import("./components/Pages/OrdersPage"));
+const AboutPage = lazy(() => import("./components/Pages/AboutPage"));
+const SearchResults = lazy(() => import("./components/Pages/SearchResult"));
 import CartPersistence from "./components/Cart/CartPersistence";
 
 function App() {
@@ -31,7 +35,9 @@ function App() {
   return (
     <>
       <CartPersistence />
+      <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
       <RouterProvider router={router} />
+      </Suspense>
     </>
   );
 }

@@ -46,6 +46,7 @@ const ProductPage = () => {
                   }}
                 >
                   <Card.Img
+                  loading="lazy"
                     variant="top"
                     src={
                       product.imageUrl?.trim() ||

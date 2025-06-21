@@ -28,6 +28,7 @@ const CategoryPage = () => {
             <div className="col-md-4 mb-4" key={index}>
               <div className="card h-100">
                 <img
+                loading="lazy"
                   src={product.imageUrl || "https://via.placeholder.com/150"}
                   alt={product.title}
                   className="card-img-top"

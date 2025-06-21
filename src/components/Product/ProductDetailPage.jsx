@@ -38,6 +38,7 @@ const ProductDetailPage = () => {
             }}
           >
             <img
+              loading="lazy"
               src={
                 product.imageUrl?.trim() ||
                 "https://via.placeholder.com/300x300?text=No+Image"
@@ -64,7 +65,7 @@ const ProductDetailPage = () => {
             <Card.Body>
               <Card.Title
                 style={{
-                  color:	"	#d1d1d1",
+                  color: "#d1d1d1",
                   fontWeight: "700",
                   fontSize: "2rem",
                   marginBottom: "12px",
@@ -72,11 +73,19 @@ const ProductDetailPage = () => {
               >
                 {product.title}
               </Card.Title>
-              <p style={{ color: "#bcbcbc", marginBottom: "8px", fontSize: "0.95rem" }}>
+              <p
+                style={{
+                  color: "#bcbcbc",
+                  marginBottom: "8px",
+                  fontSize: "0.95rem",
+                }}
+              >
                 {product.category}
               </p>
               <h4 className="text-warning mb-3">₹{product.price}</h4>
-              <p style={{ color: "#cccccc", fontSize: "1rem" }}>{product.description}</p>
+              <p style={{ color: "#cccccc", fontSize: "1rem" }}>
+                {product.description}
+              </p>
 
               <Button
                 variant="secondary"
