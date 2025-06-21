@@ -72,11 +72,11 @@ const ProductPage = () => {
                 <h5>₹{product.price || "N/A"}</h5>
                 <Button
                   style={{
-                    background: "#333",
-                    border: "1px solid #555",
-                    color: "#f1f1f1",
-                    transition: "background 0.3s",
-                  }}
+                      background: "linear-gradient(to right, #6b7280, #9ca3af)",
+                      border: "none",
+                      color: "#ffffff",
+                      transition: "opacity 0.3s",
+                    }}
                   className="me-2"
                   onClick={() => dispatch(addToCart(product))}
                 >
@@ -84,12 +84,12 @@ const ProductPage = () => {
                 </Button>
                 <Link to={`/product/${product.id}`}>
                   <Button
+                    
                     style={{
-                      background: "linear-gradient(to right, #6b7280, #9ca3af)",
-                      border: "none",
-                      color: "#ffffff",
-                      transition: "opacity 0.3s",
-                    }}
+                    background: "linear-gradient(to right, #007bff, #0056b3)",
+                    border: "none",
+                    transition: "opacity 0.3s",
+                  }}
                     onClick={() => {
                       dispatch(addToCart(product)); // Add product to cart
                       dispatch(toggleCart()); // Open the cart drawer
