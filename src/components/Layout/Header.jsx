@@ -14,6 +14,8 @@ import { authActions } from "../../store/authSlice";
 import Auth from "../Auth/Auth";
 import Profile from "../Auth/Profile";
 import { toggleCart } from "../../store/cartSlice";
+import styles from './Header.module.css';
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -63,6 +65,7 @@ const Header = () => {
           <Navbar.Brand
            as={Link} 
            to="/" 
+           className={styles.shoppyBrand}
            style={{
               color: '#ffffff',
               fontWeight: 'bold',
@@ -93,7 +96,7 @@ const Header = () => {
                   }}
                 />
                 <Button 
-                className="ms-2"
+                className={`ms-2 ${styles.headerBtn}`}
                  style={{
                     background: 'linear-gradient(to right, #4B4B4B, #9E9E9E)',
                     border: 'none',
@@ -110,10 +113,7 @@ const Header = () => {
               <Nav.Link 
               as={NavLink}
                to="/about"
-                 className={({ isActive }) => (isActive ? "fw-bold" : "")}
-                  style={({ isActive }) => ({
-                    color: isActive ? "#fbbf24" : "#ffffff",
-                  })} 
+                 className={styles.headerLink}
               
               >
                 About
@@ -122,17 +122,14 @@ const Header = () => {
                 <Nav.Link 
                 as={NavLink}
                 to="/orders"
-                  className={({ isActive }) => (isActive ? "fw-bold" : "")}
-                  style={({ isActive }) => ({
-                    color: isActive ? "#fbbf24" : "#ffffff",
-                  })}
+                  className={styles.headerLink}
                  >
                   Orders
                 </Nav.Link>
               )}
 
               <Button
-                className="text-white ms-2 p-0"
+                className={`text-white ms-2 p-0 ${styles.cartIcon}`}
                 onClick={() => dispatch(toggleCart())}
                 variant="link"
                 
@@ -145,14 +142,14 @@ const Header = () => {
                   <Button
                     onClick={openProfileModalHandler}
                      variant="link"
-                    className="text-white ms-3 p-0"
+                    className={`text-white ms-3 p-0 ${styles.profileIcon}`}
                   >
                     <i className="bi bi-person" style={{fontSize:'1.3rem'}}></i>
                   </Button>
                   <Button
                     onClick={logoutHandler}
                     variant="outline-light"
-                    className="ms-2"
+                    className={`ms-2 ${styles.headerBtn}`}
                   >
                     Logout
                   </Button>
@@ -160,7 +157,7 @@ const Header = () => {
               ) : (
                 <Button
                   onClick={openLoginModalHandler}
-                  className="ms-3"
+                  className={`ms-3  ${styles.headerBtn}`}
                   variant="outline-light"
                 >
                   Login

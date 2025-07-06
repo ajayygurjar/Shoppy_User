@@ -4,7 +4,6 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 const About = () => {
   return (
     <Container className="my-5">
-      <h1 className="text-center mb-4">About Shoppy</h1>
 
       <Row className="mb-5">
         <Col md={8} className="mx-auto text-center">

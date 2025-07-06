@@ -1,4 +1,5 @@
-// src/pages/ProductDetailPage.jsx
+
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import useFetch from "../../hooks/useFetch";
@@ -16,6 +17,33 @@ const ProductDetailPage = () => {
   } = useFetch(
     `https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/products/${id}.json`
   );
+
+  const [zoomStyle, setZoomStyle] = useState({
+    transform: "scale(1)",
+    transformOrigin: "center center",
+    transition: "transform 0.3s ease",
+  });
+
+  const handleMouseMove = (e) => {
+    const bounds = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - bounds.left) / bounds.width) * 100;
+    const y = ((e.clientY - bounds.top) / bounds.height) * 100;
+
+    setZoomStyle({
+      transform: "scale(1.6)",
+      transformOrigin: `${x}% ${y}%`,
+      transition: "transform 0.1s ease",
+    });
+  };
+
+  const resetZoom = () => {
+    setZoomStyle({
+      transform: "scale(1)",
+      transformOrigin: "center center",
+      transition: "transform 0.3s ease",
+    });
+  };
+
 
   if (loading) return <p className="text-center mt-4">Loading...</p>;
   if (error)
@@ -35,7 +63,10 @@ const ProductDetailPage = () => {
               padding: "20px",
               borderRadius: "8px",
               textAlign: "center",
-            }}
+              overflow:'hidden',
+            }} 
+             onMouseMove={handleMouseMove}
+            onMouseLeave={resetZoom}
           >
             <img
               loading="lazy"
@@ -46,6 +77,7 @@ const ProductDetailPage = () => {
               style={{
                 maxHeight: "400px",
                 objectFit: "contain",
+                ...zoomStyle,
               }}
               alt={product.title}
               className="img-fluid"

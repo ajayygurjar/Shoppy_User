@@ -1,0 +1,36 @@
+
+.shoppyBrand {
+  color: #ffffff !important;
+  font-weight: bold;
+  text-shadow: 0 0 6px #00d4ff;
+  transition: color 0.3s ease, text-shadow 0.3s ease !important;
+}
+
+.shoppyBrand:hover {
+  color: #fbbf24 !important;
+  text-shadow: 0 0 10px #fbbf24 !important;
+}
+
+.headerLink {
+  color: #ffffff !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease !important;
+  padding-bottom: 4px;
+}
+
+.headerLink:hover {
+  color: #fbbf24 !important;
+  text-shadow: 0 0 6px rgba(251, 191, 36, 0.7) !important;
+}
+
+.cartIcon:hover,
+.profileIcon:hover {
+  color: #fbbf24 !important;
+  transform: scale(1.1) !important;
+  transition: transform 0.2s ease, color 0.2s ease !important;
+}
+
+.headerBtn:hover {
+  opacity: 0.9 !important;
+  transform: scale(1.02) !important;
+  transition: transform 0.2s ease, opacity 0.2s ease !important;
+}

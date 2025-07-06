@@ -1,3 +1,4 @@
+import "./ProductPage.css";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
@@ -25,6 +26,7 @@ const ProductPage = () => {
         {data.map((product) => (
           <Col md={4} key={product.id} className="mb-4">
             <Card
+             className="product-card"
               style={{
                 backgroundColor: "#1f1f1f",
                 color: "#f1f1f1",
@@ -46,12 +48,14 @@ const ProductPage = () => {
                   }}
                 >
                   <Card.Img
-                  loading="lazy"
+                  className="product-card-img"
+                    loading="lazy"
                     variant="top"
                     src={
                       product.imageUrl?.trim() ||
                       "https://via.placeholder.com/150"
                     }
+                      
                     style={{
                       maxHeight: "100%",
                       width: "auto",
@@ -72,25 +76,26 @@ const ProductPage = () => {
                 </Card.Title>
                 <h5>₹{product.price || "N/A"}</h5>
                 <Button
+                className="me-2 product-button add-to-cart"
                   style={{
-                      background: "linear-gradient(to right, #6b7280, #9ca3af)",
-                      border: "none",
-                      color: "#ffffff",
-                      transition: "opacity 0.3s",
-                    }}
-                  className="me-2"
+                    background: "linear-gradient(to right, #6b7280, #9ca3af)",
+                    border: "none",
+                    color: "#ffffff",
+                    
+                  }}
+                  
                   onClick={() => dispatch(addToCart(product))}
                 >
                   Add to Cart
                 </Button>
                 <Link to={`/product/${product.id}`}>
                   <Button
-                    
+                  className="me-2 product-button buy-now"
                     style={{
-                    background: "linear-gradient(to right, #007bff, #0056b3)",
-                    border: "none",
-                    transition: "opacity 0.3s",
-                  }}
+                      background: "linear-gradient(to right, #007bff, #0056b3)",
+                      border: "none",
+                      
+                    }}
                     onClick={() => {
                       dispatch(addToCart(product)); // Add product to cart
                       dispatch(toggleCart()); // Open the cart drawer

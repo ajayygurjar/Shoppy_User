@@ -49,6 +49,9 @@ const HeroCarousel = () => {
         <Carousel.Item key={id}>
           <div
             style={{
+              position: "relative",
+              backgroundImage:
+                "linear-gradient(to right, rgba(18, 18, 18, 0.6), rgba(18, 18, 18, 0.2))",
               backgroundColor: "#2a2a2a",
               display: "flex",
               justifyContent: "center",
@@ -57,6 +60,7 @@ const HeroCarousel = () => {
               padding: "20px",
               borderRadius: "8px",
               boxShadow: "inset 0 0 40px rgba(0, 0, 0, 0.5)",
+              overflow: "hidden",
             }}
           >
             <img
@@ -66,7 +70,14 @@ const HeroCarousel = () => {
                 maxHeight: "100%",
                 maxWidth: "100%",
                 objectFit: "contain",
+                transition: "transform 0.6s ease",
               }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.05)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
             />
           </div>
 
@@ -76,6 +87,7 @@ const HeroCarousel = () => {
               borderRadius: "12px",
               padding: "20px",
               color: "#f1f1f1",
+              
             }}
           >
             <h3 style={{ color: "#fbbf24" }}>{title}</h3>
