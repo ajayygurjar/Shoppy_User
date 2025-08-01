@@ -9,7 +9,7 @@ import { fetchAddress } from "../../store/addressSlice";
 
 
 
-const API_Key = "AIzaSyDVvJYqgz-adO06OWVJcGPCeEdwSMYz1is";
+const API_Key = import.meta.env.VITE_API_KEY;
 const SignUp_Url =
   "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=";
 const SignIn_Url =

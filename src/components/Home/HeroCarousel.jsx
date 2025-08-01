@@ -52,11 +52,13 @@ const HeroCarousel = () => {
               position: "relative",
               backgroundImage:
                 "linear-gradient(to right, rgba(18, 18, 18, 0.6), rgba(18, 18, 18, 0.2))",
+                
               backgroundColor: "#2a2a2a",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               height: "400px",
+              marginTop:"80px",
               padding: "20px",
               borderRadius: "8px",
               boxShadow: "inset 0 0 40px rgba(0, 0, 0, 0.5)",

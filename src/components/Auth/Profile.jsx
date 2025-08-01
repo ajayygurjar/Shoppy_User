@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import { useDispatch } from 'react-redux';
 import { setAddress } from '../../store/addressSlice';
 
-const API_KEY = "AIzaSyDVvJYqgz-adO06OWVJcGPCeEdwSMYz1is";
+const API_KEY = import.meta.env.VITE_API_KEY;;
 const UPDATE_PROFILE_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
 const LOOKUP_PROFILE_URL = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`;
 const DATABASE_URL = "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app";

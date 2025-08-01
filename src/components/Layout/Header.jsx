@@ -7,15 +7,14 @@ import {
   Form,
 } from "react-bootstrap";
 
-import { NavLink,Link, useNavigate } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { authActions } from "../../store/authSlice";
 import Auth from "../Auth/Auth";
 import Profile from "../Auth/Profile";
 import { toggleCart } from "../../store/cartSlice";
-import styles from './Header.module.css';
-
+import styles from "./Header.module.css";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -53,25 +52,29 @@ const Header = () => {
 
   return (
     <>
-      <Navbar 
-      style={{
-          background: 'linear-gradient(135deg, #121212, #1f1f1f)',
-          borderBottom: '1px solid #2a2a2a',
+      <Navbar
+        style={{
+          background: "rgba(0, 0, 0, 0.5)",
+          borderBottom: "1px solid #2a2a2a",
+          position: "fixed",
+          zIndex: 5,
+          width: '100%'
         }}
         expand="lg"
         variant="dark"
-      className="text-white">
+        className="text-white"
+      >
         <Container>
           <Navbar.Brand
-           as={Link} 
-           to="/" 
-           className={styles.shoppyBrand}
-           style={{
-              color: '#ffffff',
-              fontWeight: 'bold',
-              textShadow: '0 0 6px #00d4ff',
+            as={Link}
+            to="/"
+            className={styles.shoppyBrand}
+            style={{
+              color: "#ffffff",
+              fontWeight: "bold",
+              textShadow: "0 0 6px #00d4ff",
             }}
-           >
+          >
             Shoppy
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -95,35 +98,30 @@ const Header = () => {
                     color: "#fff",
                   }}
                 />
-                <Button 
-                className={`ms-2 ${styles.headerBtn}`}
-                 style={{
-                    background: 'linear-gradient(to right, #4B4B4B, #9E9E9E)',
-                    border: 'none',
-                    color: 'white',
+                <Button
+                  className={`ms-2 ${styles.headerBtn}`}
+                  style={{
+                    background: "linear-gradient(to right, #4B4B4B, #9E9E9E)",
+                    border: "none",
+                    color: "white",
                   }}
-                 type="submit"
-                 >
+                  type="submit"
+                >
                   <i className="bi bi-search"></i>
                 </Button>
               </InputGroup>
             </Form>
 
             <Nav className="ms-auto align-items-center">
-              <Nav.Link 
-              as={NavLink}
-               to="/about"
-                 className={styles.headerLink}
-              
-              >
+              <Nav.Link as={NavLink} to="/about" className={styles.headerLink}>
                 About
               </Nav.Link>
               {isLoggedIn && (
-                <Nav.Link 
-                as={NavLink}
-                to="/orders"
+                <Nav.Link
+                  as={NavLink}
+                  to="/orders"
                   className={styles.headerLink}
-                 >
+                >
                   Orders
                 </Nav.Link>
               )}
@@ -132,19 +130,21 @@ const Header = () => {
                 className={`text-white ms-2 p-0 ${styles.cartIcon}`}
                 onClick={() => dispatch(toggleCart())}
                 variant="link"
-                
               >
-                <i className="bi bi-cart" style={{fontSize:'1.3rem'}}></i>
+                <i className="bi bi-cart" style={{ fontSize: "1.3rem" }}></i>
               </Button>
 
               {isLoggedIn ? (
                 <>
                   <Button
                     onClick={openProfileModalHandler}
-                     variant="link"
+                    variant="link"
                     className={`text-white ms-3 p-0 ${styles.profileIcon}`}
                   >
-                    <i className="bi bi-person" style={{fontSize:'1.3rem'}}></i>
+                    <i
+                      className="bi bi-person"
+                      style={{ fontSize: "1.3rem" }}
+                    ></i>
                   </Button>
                   <Button
                     onClick={logoutHandler}
