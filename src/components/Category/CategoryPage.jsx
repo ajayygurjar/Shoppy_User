@@ -20,7 +20,7 @@ const CategoryPage = () => {
   );
 
   return (
-    <div className="container py-4">
+    <div className="container py-4 mt-5">
       <h2 className="mb-4 text-capitalize">{decodedCategory} Products</h2>
       <div className="row">
         {products.length > 0 ? (

@@ -5,9 +5,9 @@ import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import { toggleCart, addToCart } from "../../store/cartSlice";
 import { useDispatch } from "react-redux";
 
-const api =
-  "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/products.json";
+  const DATABASE_URL =import.meta.env.VITE_DATABASE_URL;
 
+  const api = `${DATABASE_URL}/products.json`;
 const ProductPage = () => {
   const { data, loading, error } = useFetch(api);
   const dispatch = useDispatch();

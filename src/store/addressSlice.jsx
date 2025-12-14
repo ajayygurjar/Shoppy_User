@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const DATABASE_URL = "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app";
+  const DATABASE_URL =import.meta.env.VITE_DATABASE_URL;
+
 
 export const fetchAddress = createAsyncThunk(
   "address/fetchAddress",

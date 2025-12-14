@@ -8,9 +8,7 @@ import {
 import axios from "axios";
 import { Button, ListGroup, Modal, Form, Spinner, Alert } from "react-bootstrap";
 
-const DATABASE_URL =
-  "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app";
-
+const DATABASE_URL =import.meta.env.VITE_DATABASE_URL;
 const Addresses = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
