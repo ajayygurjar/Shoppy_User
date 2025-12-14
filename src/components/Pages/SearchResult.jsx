@@ -7,9 +7,9 @@ const useQuery = () => new URLSearchParams(useLocation().search);
 const SearchResults = () => {
   const query = useQuery();
   const searchTerm = query.get("q") || "";
-  const DATABASE_URL =import.meta.env.VITE_DATABASE_URL;
 
-  const api = `${DATABASE_URL}/products.json`;
+  const api =
+    "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/products.json";
 
   const { data: products, loading, error } = useFetch(api);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -30,7 +30,7 @@ const SearchResults = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-4">
       <h3>Search Results for "{searchTerm}"</h3>
       {filteredProducts.length > 0 ? (
         <div className="row">

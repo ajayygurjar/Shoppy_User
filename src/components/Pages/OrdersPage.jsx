@@ -4,7 +4,8 @@ import axios from "axios";
 import { Table, Button, Image, Container, Spinner, Alert } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
-const FIREBASE_ORDERS_URL =import.meta.env.VITE_DATABASE_URL;
+const FIREBASE_ORDERS_URL =
+  "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/orders";
 
 
 const OrdersPage = () => {
@@ -19,7 +20,7 @@ const OrdersPage = () => {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${FIREBASE_ORDERS_URL}/orders.json`);
+      const res = await axios.get(`${FIREBASE_ORDERS_URL}.json`);
       const data = res.data || {};
       const loaded = Object.entries(data)
         .map(([id, order]) => ({

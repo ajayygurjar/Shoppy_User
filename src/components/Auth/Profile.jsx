@@ -10,7 +10,7 @@ import { setAddress } from '../../store/addressSlice';
 const API_KEY = import.meta.env.VITE_API_KEY;;
 const UPDATE_PROFILE_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
 const LOOKUP_PROFILE_URL = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`;
-const DATABASE_URL =import.meta.env.VITE_DATABASE_URL;;
+const DATABASE_URL = "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app";
 
 const Profile = ({ show, onHide }) => {
   const dispatch=useDispatch()

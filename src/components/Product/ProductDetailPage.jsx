@@ -9,14 +9,13 @@ import { addToCart, toggleCart } from "../../store/cartSlice";
 const ProductDetailPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  
-  const DATABASE_URL =import.meta.env.VITE_DATABASE_URL;
 
   const {
     data: product,
     loading,
     error,
-  } = useFetch(`${DATABASE_URL}/products/${id}.json`
+  } = useFetch(
+    `https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/products/${id}.json`
   );
 
   const [zoomStyle, setZoomStyle] = useState({

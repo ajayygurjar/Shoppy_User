@@ -9,7 +9,6 @@ const CartPersistence = () => {
   const dispatch = useDispatch();
 
   const userId = auth.email ? auth.email.replace(/[@.]/g, "_") : null;
-  const DATABASE_URL =import.meta.env.VITE_DATABASE_URL;
 
   
   useEffect(() => {
@@ -19,7 +18,7 @@ const CartPersistence = () => {
       if (auth.isLoggedIn && userId) {
         try {
           const res = await axios.get(
-            `${DATABASE_URL}/carts/${userId}.json`
+            `https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/carts/${userId}.json`
           );
           const cartData = res.data || {};
           dispatch(loadCart(cartData));

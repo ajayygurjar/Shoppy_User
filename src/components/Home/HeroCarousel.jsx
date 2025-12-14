@@ -3,9 +3,8 @@ import { Carousel, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 
-const DATABASE_URL =import.meta.env.VITE_DATABASE_URL;
-
-const api =`${DATABASE_URL}/products.json`;
+const api =
+  "https://adapthomeadmin-default-rtdb.asia-southeast1.firebasedatabase.app/products.json";
 
 const getRandomItems = (arr, n) => {
   const result = [];
