@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import RootLayout from "./components/Layout/RootLayout";
+import Loader from "./components/UI/Loader";
 
 
 
@@ -35,7 +36,7 @@ function App() {
   return (
     <>
       <CartPersistence />
-      <Suspense fallback={<div className="text-center mt-5">Loading...</div>}>
+      <Suspense fallback={<Loader text="Loading page..." />}>
       <RouterProvider router={router} />
       </Suspense>
     </>
